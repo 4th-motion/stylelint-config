@@ -45,13 +45,20 @@ const handleOverwrite = (key, name) => {
   }
 }
 
-// add script `lint` to package.json
+function getKeyByValue(object, value) {
+  return Object.keys(object).find((key) => object[key] === value)
+}
+
+// get task name from bin field in package.json
+const TASK_NAME = getKeyByValue(pkg.bin, './bin/stylelint.sh')
+
+// add script `lint:scss` to package.json
 handleOverwrite(pkg.scripts['lint:scss'], 'lint:scss')
-pkg.scripts['lint:scss'] = '4th-stylelint *.scss --color --fix'
+pkg.scripts['lint:scss'] = `${TASK_NAME} *.scss --color --fix`
 
 // add `stylelint`
 handleOverwrite(pkg.stylelint, 'stylelint')
-pkg.stylelint = { extends: ['@4th/stylelint-config'] }
+pkg.stylelint = { extends: [pkg.name] }
 
 // add pre-commit script to package.json
 const GIT_HOOKS_NAME = '@4th/git-hooks'
@@ -61,13 +68,13 @@ if (pkg.devDependencies[GIT_HOOKS_NAME]) {
     chalk`{cyanBright.bold [INFO]   } found {underline ${GIT_HOOKS_NAME}} in ${PACKAGE_FILENAME}. Adding a lint step to the {underline pre-commit} hook.`
   )
 
-  // add script `lint:staged` to package.json
+  // add script `lint:scss:staged` to package.json
   const LINT_STAGED_SCRIPTNAME = 'lint:scss:staged'
 
   handleOverwrite(pkg.scripts[LINT_STAGED_SCRIPTNAME], LINT_STAGED_SCRIPTNAME)
   pkg.scripts[
     LINT_STAGED_SCRIPTNAME
-  ] = `git diff --diff-filter=ACMRT --cached --name-only '*.scss' | xargs 4th-stylelint`
+  ] = `git diff --diff-filter=ACMRT --cached --name-only '*.scss' | xargs ${TASK_NAME}`
 
   // add pre-commit task
   pkg.git = pkg.git || {}
