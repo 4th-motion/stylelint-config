@@ -15,7 +15,7 @@
   },
   "scripts": {
     "fresh": "rm -rf node_modules; yarn install",
-    "lint": "4th-eslint . --color --fix"
+    "lint:js": "4th-eslint . --color --fix"
   },
   "dependencies": {
     "arg": ">= 2",
