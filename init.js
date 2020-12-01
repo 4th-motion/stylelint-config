@@ -61,7 +61,7 @@ pkg.scripts['lint:scss'] = `${TASK_NAME} *.scss --color --fix`
 
 // add `stylelint`
 handleOverwrite(pkg.stylelint, 'stylelint')
-pkg.stylelint = { extends: [pkg.name] }
+pkg.stylelint = { extends: [pkgLocal.name] }
 
 // add pre-commit script to package.json
 const GIT_HOOKS_NAME = '@4th/git-hooks'
