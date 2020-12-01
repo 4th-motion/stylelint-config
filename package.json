@@ -10,7 +10,7 @@
     "type": "git"
   },
   "bin": {
-    "4th-stylelint": "./stylelint.sh",
+    "4th-stylelint": "./bin/stylelint.sh",
     "4th-stylelint-init": "./init.js"
   },
   "scripts": {
