@@ -99,7 +99,7 @@ You can edit the files that define the coding standards as needed. You can also 
 
 @4th/git-hooks | @4th/eslint-config
 :-------------------------|:-------------------------
-[![@4th/git-hooks][git-hooks-image]][git-hooks] | [![@4th/stylelint-config][eslint-image]][eslint-config]
+[![@4th/git-hooks][git-hooks-image]][git-hooks] | [![@4th/eslint-config][eslint-image]][eslint-config]
 
 <br>
 
