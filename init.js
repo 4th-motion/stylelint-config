@@ -57,7 +57,7 @@ const TASK_NAME = getKeyByValue(pkgLocal.bin, './bin/stylelint.sh') || '4th-styl
 
 // add script `lint:scss` to package.json
 handleOverwrite(pkg.scripts['lint:scss'], 'lint:scss')
-pkg.scripts['lint:scss'] = `${TASK_NAME} *.scss --color --fix`
+pkg.scripts['lint:scss'] = `${TASK_NAME} ./**/*.scss --color --fix --quiet`
 
 // add `stylelint`
 handleOverwrite(pkg.stylelint, 'stylelint')
@@ -77,7 +77,7 @@ if (pkg.devDependencies[GIT_HOOKS_NAME]) {
   handleOverwrite(pkg.scripts[LINT_STAGED_SCRIPTNAME], LINT_STAGED_SCRIPTNAME)
   pkg.scripts[
     LINT_STAGED_SCRIPTNAME
-  ] = `git diff --diff-filter=ACMRT --cached --name-only '*.scss' | xargs ${TASK_NAME}`
+  ] = `git diff --diff-filter=ACMRT --cached --name-only --quiet './**/*.scss' | xargs ${TASK_NAME}`
 
   // add pre-commit task
   pkg.git = pkg.git || {}
