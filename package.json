@@ -1,19 +1,18 @@
 {
-  "name": "@4th/stylelint-config",
+  "name": "@4th-motion/stylelint-config",
   "description": "An easy to set up stylelint configuration that can be shared between your projects.",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Marco Koenen <mako@4thmotion.com>",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/4th-motion/stylelint-config",
+    "url": "git://github.com/4th-motion/stylelint-config.git",
     "type": "git"
   },
   "keywords": [
     "style guide",
     "lint",
-    "stylelint",
-    "4th"
+    "stylelint"
   ],
   "bin": {
     "4th-stylelint": "./bin/stylelint.sh",
@@ -21,7 +20,7 @@
   },
   "scripts": {
     "fresh": "rm -rf node_modules; yarn install",
-    "lint:js": "4th-eslint . --color --fix"
+    "lint:js": "4th-eslint ./**/*.js --color --fix --quiet"
   },
   "dependencies": {
     "arg": ">= 2",
@@ -33,14 +32,14 @@
     "stylelint-scss": ">= 3"
   },
   "devDependencies": {
-    "@4th/eslint-config": "4th-motion/eslint-config"
+    "@4th-motion/eslint-config": ">= 1"
   },
   "engines": {
     "node": ">= 6"
   },
   "eslintConfig": {
     "extends": [
-      "@4th/eslint-config"
+      "@4th-motion/eslint-config"
     ]
   }
 }

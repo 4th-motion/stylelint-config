@@ -64,7 +64,7 @@ handleOverwrite(pkg.stylelint, 'stylelint')
 pkg.stylelint = { extends: [pkgLocal.name] }
 
 // add pre-commit script to package.json
-const GIT_HOOKS_NAME = '@4th/git-hooks'
+const GIT_HOOKS_NAME = '@4th-motion/git-hooks'
 
 if (pkg.devDependencies[GIT_HOOKS_NAME]) {
   console.log(
