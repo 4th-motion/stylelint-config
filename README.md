@@ -81,7 +81,7 @@ You can edit the files that define the coding standards as needed. You can also 
   "bin": {
     "company-stylelint": "./bin/stylelint.sh",
     "company-stylelint-init": "./init.js"
-  },
+  }
 }
 ```
 
