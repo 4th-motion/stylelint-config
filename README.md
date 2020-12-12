@@ -72,21 +72,6 @@ If you have [@4th-motion/git-hooks][git-hooks] as a devDependency, the _package.
 
 <br>
 
-## Customize to your needs
-
-You can edit the files that define the coding standards as needed. You can also rename this project to `@company/stylelint-config` to tailor it to your cooporate. To change the name of the initialization process, you must modify the fields within `bin` in the _package.json_ file as follows:
-
-```json
-{
-  "bin": {
-    "company-stylelint": "./bin/stylelint.sh",
-    "company-stylelint-init": "./init.js"
-  }
-}
-```
-
-<br>
-
 ## Further documents
 - [Changelog](/docs/changelog.md)
 - [Contributing](/docs/contributing.md)
