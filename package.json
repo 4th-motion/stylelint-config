@@ -1,7 +1,7 @@
 {
   "name": "@4th-motion/stylelint-config",
   "description": "An easy to set up stylelint configuration that can be shared between your projects.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "author": "Marco Koenen <mako@4thmotion.com>",
   "license": "MIT",
@@ -23,19 +23,19 @@
     "lint:js": "4th-eslint ./**/*.js --color --fix --quiet"
   },
   "dependencies": {
-    "arg": ">= 2",
-    "chalk": ">= 2.4",
-    "stylelint": ">= 13",
-    "stylelint-config-recommended": ">=3.0.0",
-    "stylelint-config-prettier": ">= 8",
-    "stylelint-order": ">= 4",
-    "stylelint-scss": ">= 3"
+    "arg": "^2",
+    "chalk": "^2.4",
+    "stylelint": "14",
+    "stylelint-config-recommended": "^7.0.0",
+    "stylelint-config-prettier": "^8",
+    "stylelint-order": "^5",
+    "stylelint-scss": "^4"
   },
   "devDependencies": {
-    "@4th-motion/eslint-config": ">= 1"
+    "@4th-motion/eslint-config": "^1"
   },
   "engines": {
-    "node": ">= 6"
+    "node": ">=6"
   },
   "eslintConfig": {
     "extends": [
