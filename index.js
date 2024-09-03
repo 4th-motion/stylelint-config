@@ -1,17 +1,22 @@
 module.exports = {
-  extends: ["stylelint-config-recommended", "stylelint-config-prettier"],
+  extends: ["stylelint-config-standard", "stylelint-config-recommended"],
   plugins: ["stylelint-order", "stylelint-scss"],
   customSyntax: "postcss-scss",
   rules: {
 
     // General rules
-    "string-quotes": "single",
-    "indentation": 2,
     "max-nesting-depth": 5,
+    "selector-pseudo-element-colon-notation": "single",
+    "import-notation": "string",
+    "media-feature-name-no-unknown": true,
     "selector-attribute-quotes": null,
     "function-no-unknown": null,
     "no-descending-specificity": null,
     "no-empty-source": null,
+    "selector-id-pattern": null,
+    "selector-class-pattern": null,
+    "media-query-no-invalid": null,
+    "annotation-no-unknown": null,
 
     // At-rule rules
     "no-invalid-position-at-import-rule": null,
@@ -39,25 +44,21 @@ module.exports = {
     "scss/at-rule-no-unknown": true,
     "scss/at-extend-no-missing-placeholder": true,
 
-    // Block rules
-    "block-opening-brace-newline-after": "always",
-    "block-closing-brace-empty-line-before": "never",
-    "block-closing-brace-newline-after": [
-      "always",
-      {
-        ignoreAtRules: ["if", "else"]
-      }
-    ],
-
     // Comment rules
     "comment-empty-line-before": "always",
     "no-invalid-double-slash-comments": null,
 
-    // Custom property rules
+    // Empty lines before rules
     "custom-property-empty-line-before": "never",
-
-    // Declaration block rules
-    "declaration-block-semicolon-newline-after": "always",
+    "rule-empty-line-before": [
+      "always",
+      {
+        except: ["after-single-line-comment", "first-nested"]
+      },
+      {
+        ignore: ["after-comment"]
+      }
+    ],
 
     // Order rules
     "order/properties-order": [
