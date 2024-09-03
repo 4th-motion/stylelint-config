@@ -4,7 +4,6 @@ const fs = require('fs')
 const arg = require('arg')
 const chalk = require('chalk')
 const path = require('path')
-
 const args = arg({ '--force': Boolean })
 
 console.log(chalk`          Initiating stylelint configuration.`)
@@ -62,6 +61,10 @@ pkg.scripts['lint:scss'] = `${TASK_NAME} ./**/*.scss --color --fix --quiet`
 // add `stylelint`
 handleOverwrite(pkg.stylelint, 'stylelint')
 pkg.stylelint = { extends: [pkgLocal.name] }
+
+// add `postcss-scss`
+handleOverwrite(pkg.devDependencies['postcss-scss'], '^4.0.9')
+pkg.devDependencies['postcss-scss'] = '^4.0.9'
 
 // add pre-commit script to package.json
 const GIT_HOOKS_NAME = '@4th-motion/git-hooks'
