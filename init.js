@@ -9,7 +9,7 @@ const args = arg({ '--force': Boolean })
 console.log(chalk`          Initiating stylelint configuration.`)
 
 // get package.json content
-const getPackageContent = (packagePath) => {
+const getPackageContent = packagePath => {
   try {
     return fs.readFileSync(packagePath, 'utf-8')
   } catch (error) {
@@ -28,10 +28,10 @@ const pkg = JSON.parse(getPackageContent(packagePath))
 const pkgLocal = JSON.parse(getPackageContent(packageLocalPath))
 
 // logging messages
-const messageAdded = (name) => chalk`{bold.magenta [ADDED]  } {bold ${name}} in ${PACKAGE_FILENAME}.`
-const messageCantOverwrite = (name) =>
+const messageAdded = name => chalk`{bold.magenta [ADDED]  } {bold ${name}} in ${PACKAGE_FILENAME}.`
+const messageCantOverwrite = name =>
   chalk`{bold.red [ERROR]  } can't overwrite {bold ${name}} in ${PACKAGE_FILENAME}. Use {underline --force} to overwrite the existing value.`
-const messageWasOverwritten = (name) =>
+const messageWasOverwritten = name =>
   chalk`{bold.yellow [WARNING]} {bold ${name}} in ${PACKAGE_FILENAME} was overwritten.`
 
 const handleOverwrite = (key, name) => {
@@ -48,7 +48,7 @@ const handleOverwrite = (key, name) => {
 }
 
 function getKeyByValue(object, value) {
-  return object ? Object.keys(object).find((key) => object[key] === value) : null
+  return object ? Object.keys(object).find(key => object[key] === value) : null
 }
 
 // get task name from bin field in package.json
@@ -56,7 +56,11 @@ const TASK_NAME = getKeyByValue(pkgLocal.bin, './bin/stylelint.sh') || '4th-styl
 
 // add script `lint:scss` to package.json
 handleOverwrite(pkg.scripts['lint:scss'], 'lint:scss')
-pkg.scripts['lint:scss'] = `${TASK_NAME} ./**/*.scss --color --fix --quiet`
+pkg.scripts['lint:scss'] = `${TASK_NAME} ./**/*.scss --color`
+
+// add an explicit opt-in script for Stylelint's safe fixes
+handleOverwrite(pkg.scripts['lint:scss:fix'], 'lint:scss:fix')
+pkg.scripts['lint:scss:fix'] = `${TASK_NAME} ./**/*.scss --color --fix`
 
 // add `stylelint`
 handleOverwrite(pkg.stylelint, 'stylelint')
@@ -80,7 +84,7 @@ if (pkg.devDependencies[GIT_HOOKS_NAME]) {
   handleOverwrite(pkg.scripts[LINT_STAGED_SCRIPTNAME], LINT_STAGED_SCRIPTNAME)
   pkg.scripts[
     LINT_STAGED_SCRIPTNAME
-  ] = `git diff --diff-filter=ACMRT --cached --name-only --quiet './**/*.scss' | xargs ${TASK_NAME}`
+  ] = `git diff --diff-filter=ACMRT --cached --name-only -- '*.scss' | while IFS= read -r file; do ${TASK_NAME} "$file" || exit $?; done`
 
   // add pre-commit task
   pkg.git = pkg.git || {}
@@ -93,7 +97,7 @@ if (pkg.devDependencies[GIT_HOOKS_NAME]) {
     }
 
     // add task only if it does not yet exist
-    if (!pkg.git['pre-commit'].filter((task) => task === LINT_STAGED_SCRIPTNAME).length) {
+    if (!pkg.git['pre-commit'].filter(task => task === LINT_STAGED_SCRIPTNAME).length) {
       pkg.git['pre-commit'].unshift(LINT_STAGED_SCRIPTNAME)
     }
   }

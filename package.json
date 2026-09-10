@@ -1,7 +1,7 @@
 {
   "name": "@4th-motion/stylelint-config",
   "description": "An easy to set up stylelint configuration that can be shared between your projects.",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "index.js",
   "author": "Marco Koenen <mako@4thmotion.com>",
   "license": "MIT",
@@ -27,8 +27,8 @@
     "chalk": "4.1.2",
     "postcss": "^8.4.44",
     "postcss-scss": "^4.0.9",
+    "postcss-selector-parser": "^7.1.0",
     "stylelint": "^16.9.0",
-    "stylelint-config-recommended": "^14.0.1",
     "stylelint-config-standard": "^36.0.1",
     "stylelint-order": "^6.0.4",
     "stylelint-scss": "^6.5.1"

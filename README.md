@@ -47,7 +47,8 @@ The initialization process extends the _package.json_ file as follows:
 ```json
 {
   "scripts": {
-    "lint:scss": "4th-stylelint . --color --fix"
+    "lint:scss": "4th-stylelint . --color",
+    "lint:scss:fix": "4th-stylelint . --color --fix"
   },
   "stylelint": {
     "extends": [
@@ -62,7 +63,7 @@ If you have [@4th-motion/git-hooks][git-hooks] as a devDependency, the _package.
 ```json
 {
   "scripts": {
-    "lint:scss:staged": "git diff --diff-filter=ACMRT --cached --name-only '*.scss' | xargs 4th-stylelint"
+    "lint:scss:staged": "git diff --diff-filter=ACMRT --cached --name-only -- '*.scss' | while IFS= read -r file; do 4th-stylelint \"$file\" || exit $?; done"
   },
   "git": {
     "pre-commit": "lint:scss:staged"
